@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Dencity Dental Care · Exceptional care</title>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ===== MULTILINGUAL SYSTEM ===== -->
+    <style>
+        .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget-icon, .goog-te-gadget-simple, .skiptranslate {
+            display: none !important;
+        }
+        body { top: 0 !important; }
+        .notranslate, [translate="no"] { unicode-bidi: isolate; }
+        .lang-btn.active-lang {
+            background: #0d9488;
+            border-color: #0c4a6e;
+            color: white;
+        }
+        /* persistent navigation with increased height and translucent on scroll */
+        nav {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            width: 100%;
+            height: 80px; 
+            display: flex;
+            align-items: center;
+        }
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+        nav.hidden-nav {
+            transform: translateY(-100%);
+        }
+    
+        .full-width {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .section-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .section-content {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .section-content {
+                padding-left: 6rem;
+                padding-right: 6rem;
+            }
+        }
+        /* section background smooth transition */
+        .section-bg, .section-bg-alt {
+            transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+        }
+        .section-bg.scrolled {
+            background: linear-gradient(135deg, #f0fdf4, #e0f2fe) !important;
+        }
+        .section-bg-alt.scrolled {
+            background: linear-gradient(135deg, #e6fffa, #bae6fd) !important;
+        }
+        /* Service card */
+        .service-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+            min-height: 320px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+            border-radius: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(13,148,136,0.15);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .service-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 40px -15px rgba(13,148,136,0.4);
+            z-index: 10;
+        }
+        .service-card .service-front {
+            transition: opacity 0.3s ease 0.1s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card .service-front img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 1rem;
+        }
+        .service-card .service-back {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(145deg, #f0fdf4, #e0f2fe);
+            border-radius: inherit;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.05s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            border: 3px solid #0d9488;
+            box-shadow: inset 0 0 30px rgba(13,148,136,0.2);
+            text-align: left;
+        }
+        .service-card:hover .service-front {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .service-card:hover .service-back {
+            opacity: 1;
+            transition: opacity 0.4s ease 0.1s;
+        }
+        .service-back h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #0d9488;
+        }
+        .service-back p {
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        .service-back .benefits {
+            font-size: 0.85rem;
+        }
+        /* Doctor cards - larger */
+        .doctor-card {
+            background: #f8fafc;
+            border: 1px solid rgba(13,148,136,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+        }
+        .doctor-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 30px -8px rgba(13,148,136,0.25);
+        }
+        .doctor-card img {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            width: 100%;
+        }
+        .rating-star { color: #fbbf24; }
+
+        /* modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            z-index: 1000; display: none; align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: white; border-radius: 2rem; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+            padding: 2rem; box-shadow: 0 25px 50px -12px black;
+        }
+        .tool-tab { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .tool-tab button { background: #f1f5f9; border: none; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
+        .tool-tab button.active { background: #0d9488; color: white; }
+        .calculator-panel { display: none; }
+        .calculator-panel.active { display: block; }
+        .calc-input { border: 1px solid #cbd5e1; border-radius: 1rem; padding: 0.75rem 1rem; width: 100%; margin-top: 0.5rem; }
+        .calc-result { margin-top: 1rem; padding: 1rem; background: #f0fdf4; border-radius: 1rem; font-weight: 500; }
+
+        /* Animated buttons */
+        .tool-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(13,148,136,0.4);
+        }
+        .tool-btn i {
+            transition: transform 0.2s;
+        }
+        .tool-btn:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Mobile menu with slower animation */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .mobile-menu.open {
+            right: 0;
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+        .mobile-menu-overlay.open {
+            display: block;
+        }
+
+        /* FAQ with +/-  */
+        details {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        details[open] {
+            background: #f0fdf4;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #0d9488;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after {
+            content: '−';
+        }
+        details .faq-content {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        details[open] .faq-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        
+        @media (max-width: 768px) {
+            .service-card {
+                min-height: 300px; 
+            }
+            .service-card .service-front img {
+                height: 120px;
+            }
+            .service-back {
+                padding: 1rem;
+            }
+            .service-back h4 {
+                font-size: 1.1rem;
+                margin-bottom: 0.3rem;
+            }
+            .service-back p {
+                font-size: 0.75rem;
+                margin-bottom: 0.3rem;
+            }
+            .service-back .benefits {
+                font-size: 0.7rem;
+            }
+            
+            .service-card:active .service-front,
+            .service-card:focus .service-front {
+                opacity: 0;
+            }
+            .service-card:active .service-back,
+            .service-card:focus .service-back {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+        (function() {
+            "use strict";
+            const MAP = { "en": "en", "np": "ne" };
+            const STORAGE_KEY = "dencity_lang";
+
+            function uniqueTargets() { return Array.from(new Set(Object.values(MAP))).join(','); }
+            function setHtmlLangDir(code) { document.documentElement.lang = code; document.documentElement.dir = "ltr"; }
+            function getSavedLang() { const saved = localStorage.getItem(STORAGE_KEY); return (saved && MAP[saved]) ? saved : "en"; }
+
+            function setLanguage(appValue, reload = true) {
+                const target = MAP[appValue] || "en";
+                setHtmlLangDir(target);
+                localStorage.setItem(STORAGE_KEY, appValue);
+                const cookieVal = "/auto/" + target;
+                const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+                document.cookie = "googtrans=" + cookieVal + "; expires=" + expires + "; path=/";
+                document.cookie = "googtrans=" + cookieVal + "; expires=" + expires + "; path=/; domain=" + location.hostname;
+                
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    const val = btn.getAttribute('data-lang');
+                    if (val === appValue) btn.classList.add('active-lang');
+                    else btn.classList.remove('active-lang');
+                });
+                if (reload) location.reload();
+            }
+
+            window.googleTranslateElementInit = function() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: uniqueTargets(),
+                    autoDisplay: false,
+                    multilanguagePage: true
+                }, 'google_translate_element');
+                const saved = getSavedLang();
+                setLanguage(saved, false);
+                setTimeout(() => {
+                    const select = document.querySelector('select.goog-te-combo');
+                    if (select) { select.value = MAP[saved] || "en"; select.dispatchEvent(new Event('change')); }
+                }, 300);
+            };
+
+            const s = document.createElement('script');
+            s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+            s.defer = true;
+            document.head.appendChild(s);
+
+            window.triggerLanguage = function(langKey) { if (MAP[langKey]) setLanguage(langKey, true); };
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const saved = getSavedLang();
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    const val = btn.getAttribute('data-lang');
+                    if (val === saved) btn.classList.add('active-lang');
+                    btn.addEventListener('click', (e) => { e.preventDefault(); triggerLanguage(btn.getAttribute('data-lang')); });
+                });
+            });
+        })();
+    </script>
+    <div id="google_translate_element" style="display:none"></div>
+    <!-- ===== END TRANSLATION ===== -->
+
+    <!-- tailwind config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandTeal: '#0d9488',
+                        brandBlue: '#0c4a6e',
+                        brandLight: '#ecfdf5',
+                        textDark: '#0f172a',
+                        textMuted: '#334155',
+                        bgSoft: '#f8fafc',
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    fontSize: { 'hero': ['7.5rem', '0.9'], 'hero-mobile': ['2.8rem', '1'] }, // adjusted for mobile
+                    borderRadius: { '4xl': '2rem' },
+                    boxShadow: { 'soft': '0 8px 40px rgba(0, 0, 0, 0.03)', 'floating': '0 10px 30px rgba(0,0,0,0.08)' },
+                    animation: { 
+                        'marquee': 'marquee 25s linear infinite', 
+                        'fadeIn': 'fadeIn 0.4s ease-in',
+                        'pulse-slow': 'pulse 2s infinite',
+                        'bounce-slow': 'bounce 2s infinite'
+                    },
+                    keyframes: { 
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } },
+                        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #ffffff; color: #0f172a; -webkit-font-smoothing: antialiased; font-family: 'Outfit', sans-serif; }
+        .teeth-bg { background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center; opacity: 0.1; mask-image: radial-gradient(circle, black 30%, transparent 70%); -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%); }
+        .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ul.custom-bullets li::before { content: "•"; color: #0d9488; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+        .pill-input { border: 1px solid #cbd5e1; border-radius: 9999px; padding: 1.25rem 2rem; width: 100%; outline: none; transition: all 0.3s ease; font-size: 1rem; }
+        .pill-input:focus { border-color: #0d9488; box-shadow: 0 0 0 4px rgba(13,148,136,0.1); }
+        .pill-input::placeholder { color: #0f172a; font-weight: 400; }
+        
+        /* Mobile stats row  */
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+            padding: 0.75rem 0.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .stat-number {
+            font-size: 2rem; 
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.8rem; 
+            color: #4b5563;
+            font-weight: 500;
+        }
+       
+        .desktop-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .desktop-stat .number {
+            font-size: 3.5rem;
+            font-weight: 500;
+        }
+        .desktop-stat .label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            max-width: 140px;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="flex justify-end mb-8">
+            <button id="closeMobileMenu" class="text-2xl text-gray-500">&times;</button>
+        </div>
+        <ul class="space-y-4 text-lg">
+            <li><a href="#" class="block py-2 hover:text-brandTeal">Home</a></li>
+            <li><a href="#about" class="block py-2 hover:text-brandTeal">About</a></li>
+            <li><a href="#services" class="block py-2 hover:text-brandTeal">Services</a></li>
+            <li><a href="#dentists" class="block py-2 hover:text-brandTeal">Dentists</a></li>
+            <li><a href="#footer" class="block py-2 hover:text-brandTeal">Location</a></li>
+            <li class="pt-4"><a href="#book" class="bg-brandTeal text-white px-6 py-3 rounded-full inline-block w-full text-center">Book Free Consultation</a></li>
+            <!-- Language switcher in mobile with fixed EN/NP and Nepali script -->
+            <li class="pt-4 flex gap-2" translate="no">
+                <button data-lang="en" class="lang-btn px-4 py-2 border rounded-full flex-1 text-sm" translate="no">EN</button>
+                <button data-lang="np" class="lang-btn px-4 py-2 border rounded-full flex-1 text-sm" translate="no">NP</button>
+            </li>
+            <li class="text-xs text-gray-500 text-center pt-2" translate="no">इन / नेप</li>
+        </ul>
+    </div>
+
+    <!-- NAVIGATION (increased height, larger logo, persistent with translucent effect) -->
+    <nav class="flex items-center justify-between px-6 w-full" id="mainNav">
+        <a href="#" class="flex items-center gap-3 text-2xl font-medium tracking-wide text-textDark">
+            <img src="assets/DencityDental Logo.jpg" alt="Dencity Dental" class="w-10 h-10 rounded-full bg-brandTeal p-1.5">
+            <span class="text-brandTeal">Dencity</span> Dental
+        </a>
+        <ul class="hidden md:flex items-center gap-3">
+            <li><a href="#" class="px-5 py-2.5 border border-gray-300 rounded-full text-base hover:border-brandTeal transition">Home</a></li>
+            <li><a href="#about" class="px-5 py-2.5 border border-gray-300 rounded-full text-base hover:border-brandTeal">About</a></li>
+            <li><a href="#services" class="px-5 py-2.5 border border-gray-300 rounded-full text-base hover:border-brandTeal">Services</a></li>
+            <li><a href="#dentists" class="px-5 py-2.5 border border-gray-300 rounded-full text-base hover:border-brandTeal">Dentists</a></li>
+            <li><a href="#footer" class="px-5 py-2.5 border border-gray-300 rounded-full text-base hover:border-brandTeal">Location</a></li>
+        </ul>
+        <div class="flex items-center gap-4">
+            <!-- Language switcher with EN/NP fixed and Nepali script hint -->
+            <div class="flex items-center bg-white border border-brandTeal/30 rounded-full overflow-hidden" translate="no">
+                <button data-lang="en" class="lang-btn px-4 py-2 text-sm font-medium transition hover:bg-brandTeal hover:text-white" translate="no">EN</button>
+                <span class="w-px h-5 bg-brandTeal/30" translate="no"></span>
+                <button data-lang="np" class="lang-btn px-4 py-2 text-sm font-medium transition hover:bg-brandTeal hover:text-white" translate="no">NP</button>
+            </div>
+            <span class="hidden md:inline text-xs text-gray-400" translate="no">इन / नेप</span>
+            <a href="#book" class="hidden md:flex items-center gap-2 bg-brandTeal text-white px-6 py-2.5 rounded-full text-base font-medium hover:bg-brandBlue transition">
+                <i class="fa-regular fa-calendar-check"></i> Book Free Consultation
+            </a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-textDark"><i class="fa-solid fa-bars text-2xl"></i></button>
+    </nav>
+
+    <!-- HERO  -->
+    <header class="full-width relative pt-12 pb-16 md:pb-32">
+        <div class="section-content">
+            <div class="absolute right-[-10%] top-[10%] w-[800px] h-[800px] teeth-bg z-0 pointer-events-none rounded-full hidden md:block"></div>
+            <div class="absolute top-4 right-6 text-right text-[10px] md:text-xs font-medium text-gray-500 uppercase hidden md:block z-10">
+                <p>July 10, 2025</p><p class="mt-1">\\ We're Open Clinic</p><p class="mt-1">10 AM - 6 PM</p>
+            </div>
+            <div class="relative z-10">
+                <br>
+                <br>
+                <h1 class="text-hero-mobile md:text-hero font-medium tracking-tight leading-[1.1]">
+                    <span class="block">Exceptional</span>
+                    <span class="block text-brandTeal">Dental <span class="text-textDark">Care</span></span>
+                </h1>
+                <div class="mt-8 md:mt-20 max-w-sm">
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
+                        With our team of experienced dentists and state-of-the-art technology, we deliver comprehensive treatments in a comfortable environment.
+                    </p>
+                    <a href="#book" class="inline-flex items-center gap-3 bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-6 py-3 md:px-8 md:py-4 rounded-full text-base font-medium hover:shadow-lg transition"><i class="fa-regular fa-calendar-check text-brandTeal"></i> Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Mobile stats row -->
+            <div class="md:hidden stats-row mt-8">
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Years excellence</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">852+</div>
+                    <div class="stat-label">Happy patients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Telecare</div>
+                </div>
+            </div>
+            <!-- Desktop stats  -->
+            <div class="hidden md:flex relative z-10 flex-row items-center justify-between mt-20 md:mt-32 gap-8">
+                <div class="desktop-stat">
+                    <span class="number">13</span>
+                    <span class="label">Years of excellence</span>
+                </div>
+                <div class="desktop-stat">
+                    <span class="number">852+</span>
+                    <span class="label">Happy patients this year</span>
+                </div>
+                <div class="desktop-stat">
+                    <span class="number">24/7</span>
+                    <span class="label">Telecare support</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- OUR SERVICES - larger cards with more details, now 9 cards, mobile 2 cols with touch descriptions -->
+    <section id="services" class="section-bg full-width pt-16 pb-20 md:pt-20 md:pb-28">
+        <div class="section-content">
+            <h2 class="text-[2.5rem] md:text-[3rem] tracking-tight font-medium mb-10 md:mb-12 text-textDark">Our Services</h2>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                <!-- 1: Clear Aligners -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://hovedentalclinic.co.uk/wp-content/uploads/2022/12/bigstock-Clear-Aligner-Dental-Night-Gua-463488851-1080x675.jpg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Clear Aligners">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Clear Aligners</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Virtually invisible</li>
+                            <li>Removable trays</li>
+                            <li>Custom plan</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Clear Aligners</h4>
+                        <p class="text-[0.65rem] md:text-sm">Nearly invisible, comfortable, removable alternative to braces. Advanced 3D planning.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Invisible – No one notices<br>
+                            ✅ Comfortable fit – no wires<br>
+                            ✅ Removable – eat & brush easily<br>
+                            ✅ Corrects gaps, crowding & bite<br>
+                            ✅ Fewer office visits
+                        </div>
+                    </div>
+                </div>
+                <!-- 2: Dental Implant -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://www.coastaldentalsurgery.com/wp-content/uploads/implant-service-graphic.jpeg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Dental Implant">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Dental Implant</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Titanium post</li>
+                            <li>Permanent crown</li>
+                            <li>Natural feel</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Dental Implant</h4>
+                        <p class="text-[0.65rem] md:text-sm">Permanent replacement that fuses with bone – closest to natural teeth.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Long-lasting (20+ years)<br>
+                            ✅ Prevents bone loss<br>
+                            ✅ Looks & feels natural<br>
+                            ✅ High success rate (>98%)<br>
+                            ✅ Protects adjacent teeth
+                        </div>
+                    </div>
+                </div>
+                <!-- 3: Laser Gum Contouring -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://www.dentalimplantsmiamibeach.com/wp-content/uploads/2020/05/gum-disease-treatment-laser-graphic-opt.jpg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Laser Gum">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Laser Gum</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Minimally invasive</li>
+                            <li>Reshape gums</li>
+                            <li>Fast healing</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Laser Gum</h4>
+                        <p class="text-[0.65rem] md:text-sm">Precise laser reshaping for gummy smile – virtually painless.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ No scalpels, minimal bleeding<br>
+                            ✅ Quick recovery (days)<br>
+                            ✅ Enhanced aesthetics<br>
+                            ✅ Little to no discomfort
+                        </div>
+                    </div>
+                </div>
+                <!-- 4: Teeth Whitening -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://drrickdentistry.com/wp-content/uploads/2019/12/how-does-professional-teeth-whitening-work.gif" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Teeth Whitening">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Whitening</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>In-office</li>
+                            <li>Removes stains</li>
+                            <li>Bright smile</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Whitening</h4>
+                        <p class="text-[0.65rem] md:text-sm">Professional bleaching – safe & effective.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Up to 8 shades whiter<br>
+                            ✅ Custom take-home trays<br>
+                            ✅ Reduces sensitivity<br>
+                            ✅ Removes tough stains
+                        </div>
+                    </div>
+                </div>
+                <!-- 5: TMJ Disorder -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://www.eaglecreekdental.ca/wp-content/uploads/2023/05/7-easy-ways-to-permanently-cure-tmj-in-2020-1080x675.jpg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="TMJ Disorder">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">TMJ</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Jaw pain relief</li>
+                            <li>Night guards</li>
+                            <li>Bite adjustment</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">TMJ Disorder</h4>
+                        <p class="text-[0.65rem] md:text-sm">Treatments for jaw clicking, headaches, bruxism.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Custom night guards<br>
+                            ✅ Muscle relaxation<br>
+                            ✅ Reduces grinding<br>
+                            ✅ Headache relief
+                        </div>
+                    </div>
+                </div>
+                <!-- 6: Braces -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://dentist-telaviv.com/wp-content/uploads/2021/04/29.jpg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Braces">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Braces</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Metal/ceramic</li>
+                            <li>Straighten teeth</li>
+                            <li>Lasting results</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Braces</h4>
+                        <p class="text-[0.65rem] md:text-sm">Traditional & modern orthodontics.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Corrects crowding<br>
+                            ✅ Improves bite<br>
+                            ✅ Various options<br>
+                            ✅ Lasting results
+                        </div>
+                    </div>
+                </div>
+                <!-- 7: Crowns, Bridges, Dentures -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://www.axiondentalcare.com/wp-content/uploads/2023/10/what-is-the-purpose-of-a-tooth-crown-scaled.jpeg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Crowns">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Crowns</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Restore teeth</li>
+                            <li>Custom fit</li>
+                            <li>Durable</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Restorative</h4>
+                        <p class="text-[0.65rem] md:text-sm">Full-mouth rehabilitation.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Crowns: protect teeth<br>
+                            ✅ Bridges: span gaps<br>
+                            ✅ Dentures: natural look<br>
+                            ✅ Implant-supported
+                        </div>
+                    </div>
+                </div>
+                <!-- 8: Root Canal Treatment -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://drkopalpathak.com/wp-content/uploads/2025/11/root-canal-treatment.jpg" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Root Canal">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Root Canal</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Save infected tooth</li>
+                            <li>Painless</li>
+                            <li>Seal & crown</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Root Canal</h4>
+                        <p class="text-[0.65rem] md:text-sm">Remove infection, relieve pain.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ Eliminates bacteria<br>
+                            ✅ Stops toothache<br>
+                            ✅ High success >95%<br>
+                            ✅ Saves natural tooth
+                        </div>
+                    </div>
+                </div>
+                <!-- 9: Pediatric Dentistry -->
+                <div class="service-card bg-bgSoft rounded-2xl md:rounded-3xl shadow-soft p-3 md:p-6 cursor-default border border-brandTeal/10">
+                    <div class="service-front">
+                        <img src="https://cdn.prod.website-files.com/6026c2a52cbbdd4aa71a539a/63d3e73ffee110b9d40c486f_Untitled%20design%20(1).png" class="w-full h-28 md:h-48 object-cover rounded-xl md:rounded-2xl mb-2 md:mb-3" alt="Pediatric Dentistry">
+                        <h3 class="text-base md:text-2xl font-bold mb-1 md:mb-2 text-brandTeal">Pediatric</h3>
+                        <ul class="custom-bullets text-[0.7rem] md:text-sm space-y-0.5 md:space-y-1 ml-3 md:ml-4">
+                            <li>Child-friendly</li>
+                            <li>Preventive</li>
+                            <li>Gentle</li>
+                        </ul>
+                    </div>
+                    <div class="service-back">
+                        <h4 class="font-bold text-brandTeal text-base md:text-2xl">Pediatric</h4>
+                        <p class="text-[0.65rem] md:text-sm">Specialized care for kids.</p>
+                        <div class="benefits text-[0.6rem] md:text-sm">
+                            ✅ First visit by age 1<br>
+                            ✅ Sealants & fluoride<br>
+                            ✅ Early assessment<br>
+                            ✅ Fun, gentle environment
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEET THE DENTISTS -->
+    <section id="dentists" class="section-bg-alt full-width py-16 md:py-20">
+        <div class="section-content">
+            <div class="flex items-end justify-between mb-10 md:mb-12">
+                <h2 class="text-[2.5rem] md:text-[3rem] tracking-tight font-medium text-textDark">Meet The Dentists</h2>
+                <div class="flex gap-4 pb-2">
+                    <button id="btn-prev" class="text-textDark hover:text-brandTeal transition"><i class="fa-solid fa-arrow-left text-xl border rounded-full p-2"></i></button>
+                    <button id="btn-next" class="text-textDark hover:text-brandTeal transition"><i class="fa-solid fa-arrow-right text-xl border rounded-full p-2"></i></button>
+                </div>
+            </div>
+            <div id="dentist-carousel" class="flex lg:grid lg:grid-cols-4 gap-4 md:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4">
+                <!-- card 1 -->
+                <div class="doctor-card relative min-w-[260px] md:min-w-[280px] lg:min-w-0 snap-start">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZDRmYzdmOWEtYzlhMi00OTc4LTkxNzgtMjllNjM4ODdkZThmXkEyXkFqcGc@._V1_.jpg" class="w-full h-44 md:h-52 object-cover rounded-2xl mb-3 md:mb-4">
+                    <div class="flex justify-between items-center mb-1 md:mb-2">
+                        <h4 class="text-lg md:text-xl font-bold">Dr. Ram Bahadur</h4>
+                        <span class="rating-star"><i class="fa-solid fa-star"></i> 4.9</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-brandTeal font-medium mb-1 md:mb-2"><i class="fa-solid fa-tooth mr-1"></i>Orthodontist</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-1"><i class="fa-regular fa-clock mr-1"></i>12+ years · Invisalign</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-2 md:mb-3">NYU trained · 500+ cases</p>
+                    <a href="#book" class="mt-auto inline-block bg-brandTeal text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-3 rounded-full w-full text-center font-medium hover:bg-brandBlue transition"><i class="fa-regular fa-calendar-check mr-1 md:mr-2"></i>Book free consultation</a>
+                </div>
+                <!-- card 2 -->
+                <div class="doctor-card relative min-w-[260px] md:min-w-[280px] lg:min-w-0 snap-start">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxSwCY9F--SzRe5tRL8fpupQeIRc4auqHR-MiHYkCSXYQjRqD9HYBDB9aXgh19YExZzjhUHhPFBQaOK_jM9oAGNlIUgC6hza9goKNYLWw&s=10" class="w-full h-44 md:h-52 object-cover rounded-2xl mb-3 md:mb-4">
+                    <div class="flex justify-between items-center mb-1 md:mb-2"><h4 class="text-lg md:text-xl font-bold">Dr. Josh Rai</h4><span class="rating-star"><i class="fa-solid fa-star"></i> 4.8</span></div>
+                    <p class="text-xs md:text-sm text-brandTeal font-medium mb-1 md:mb-2"><i class="fa-solid fa-microscope mr-1"></i>Implantologist</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-1">Fellowship ICOI · 1000+ implants</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-2 md:mb-3">Digital smile design</p>
+                    <a href="#book" class="mt-auto inline-block bg-brandTeal text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-3 rounded-full w-full text-center font-medium hover:bg-brandBlue transition"><i class="fa-regular fa-calendar-check mr-1 md:mr-2"></i>Book free consultation</a>
+                </div>
+                <!-- card 3 -->
+                <div class="doctor-card relative min-w-[260px] md:min-w-[280px] lg:min-w-0 snap-start">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Mahabir_Pun_at_Mahabir%27s_Center_for_Nepal_Connection_%28cropped%29.jpg" class="w-full h-44 md:h-52 object-cover rounded-2xl mb-3 md:mb-4">
+                    <div class="flex justify-between items-center mb-1 md:mb-2"><h4 class="text-lg md:text-xl font-bold">Dr. Mahabir Pun</h4><span class="rating-star"><i class="fa-solid fa-star"></i> 4.9</span></div>
+                    <p class="text-xs md:text-sm text-brandTeal font-medium mb-1 md:mb-2"><i class="fa-solid fa-brush mr-1"></i>Prosthodontist</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-1">15 years · Full mouth rehab</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-2 md:mb-3">Ceramic specialist</p>
+                    <a href="#book" class="mt-auto inline-block bg-brandTeal text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-3 rounded-full w-full text-center font-medium hover:bg-brandBlue transition"><i class="fa-regular fa-calendar-check mr-1 md:mr-2"></i>Book free consultation</a>
+                </div>
+                <!-- card 4 -->
+                <div class="doctor-card relative min-w-[260px] md:min-w-[280px] lg:min-w-0 snap-start">
+                    <img src="https://streetnepal.com/wp-content/uploads/2022/03/swastima-1.jpg" class="w-full h-44 md:h-52 object-cover rounded-2xl mb-3 md:mb-4">
+                    <div class="flex justify-between items-center mb-1 md:mb-2"><h4 class="text-lg md:text-xl font-bold">Dr. Swastima</h4><span class="rating-star"><i class="fa-solid fa-star"></i> 4.9</span></div>
+                    <p class="text-xs md:text-sm text-brandTeal font-medium mb-1 md:mb-2"><i class="fa-solid fa-child mr-1"></i>Pediatric dentist</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-1">Child specialist · Sedation</p>
+                    <p class="text-[0.7rem] md:text-xs text-textMuted mb-2 md:mb-3">Early intervention</p>
+                    <a href="#book" class="mt-auto inline-block bg-brandTeal text-white text-xs md:text-sm px-3 py-2 md:px-4 md:py-3 rounded-full w-full text-center font-medium hover:bg-brandBlue transition"><i class="fa-regular fa-calendar-check mr-1 md:mr-2"></i>Book free consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEALTH ASSESSMENT TOOLS ) -->
+    <section id="health-tools" class="section-bg full-width py-16 md:py-20">
+        <div class="section-content">
+            <h2 class="text-3xl md:text-4xl font-medium mb-4 text-textDark">Health Assessment Tools</h2>
+            <p class="text-textMuted mb-10 md:mb-12">Check your health status with our medical assessment calculators</p>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+                <!-- BMI -->
+                <div class="bg-white p-4 md:p-6 rounded-3xl shadow-soft border-t-4 border-brandTeal hover:shadow-xl transition">
+                    <i class="fa-solid fa-weight-scale text-3xl md:text-4xl text-brandTeal mb-3 animate-pulse-slow"></i>
+                    <h4 class="font-bold text-base md:text-lg">BMI Calculator</h4>
+                    <p class="text-xs text-gray-600 mb-3">Calculate your Body Mass Index</p>
+                    <ul class="text-xs space-y-1 mb-4 list-disc pl-4"><li>Check weight category</li><li>Healthy range</li><li>Monitor goals</li></ul>
+                    <button class="open-modal-btn tool-btn mt-2 bg-brandTeal text-white text-xs md:text-sm px-3 py-2 rounded-full w-full font-medium flex items-center justify-center gap-2" data-tool="bmi">
+                        <i class="fa-solid fa-calculator"></i> Calculate BMI
+                    </button>
+                </div>
+                <!-- Heart Risk -->
+                <div class="bg-white p-4 md:p-6 rounded-3xl shadow-soft border-t-4 border-brandBlue hover:shadow-xl transition">
+                    <i class="fa-solid fa-heart-pulse text-3xl md:text-4xl text-brandBlue mb-3 animate-pulse-slow"></i>
+                    <h4 class="font-bold text-base md:text-lg">Heart Risk</h4>
+                    <p class="text-xs text-gray-600 mb-3">10-year cardiovascular risk</p>
+                    <ul class="text-xs space-y-1 mb-4 list-disc pl-4"><li>Framingham score</li><li>Age, BP, cholesterol</li><li>Prevention tips</li></ul>
+                    <button class="open-modal-btn tool-btn mt-2 bg-brandBlue text-white text-xs md:text-sm px-3 py-2 rounded-full w-full font-medium flex items-center justify-center gap-2" data-tool="heart">
+                        <i class="fa-solid fa-heart-circle-check"></i> Assess Risk
+                    </button>
+                </div>
+                <!-- Kidney Function -->
+                <div class="bg-white p-4 md:p-6 rounded-3xl shadow-soft border-t-4 border-yellow-600 hover:shadow-xl transition">
+<i class="fa-solid fa-stethoscope text-3xl md:text-4xl text-yellow-600 mb-3 animate-pulse-slow"></i>                    <h4 class="font-bold text-base md:text-lg">Kidney Function</h4>
+                    <p class="text-xs text-gray-600 mb-3">eGFR (kidney health)</p>
+                    <ul class="text-xs space-y-1 mb-4 list-disc pl-4"><li>Assess kidney function</li><li>Early detection</li><li>Monitor health</li></ul>
+                    <button class="open-modal-btn tool-btn mt-2 bg-yellow-600 text-white text-xs md:text-sm px-3 py-2 rounded-full w-full font-medium flex items-center justify-center gap-2" data-tool="kidney">
+                        <i class="fa-solid fa-flask"></i> Check eGFR
+                    </button>
+                </div>
+                <!-- Diabetes Risk -->
+                <div class="bg-white p-4 md:p-6 rounded-3xl shadow-soft border-t-4 border-green-600 hover:shadow-xl transition">
+                    <i class="fa-solid fa-droplet text-3xl md:text-4xl text-green-600 mb-3 animate-pulse-slow"></i>
+                    <h4 class="font-bold text-base md:text-lg">Diabetes Risk</h4>
+                    <p class="text-xs text-gray-600 mb-3">Type 2 diabetes risk</p>
+                    <ul class="text-xs space-y-1 mb-4 list-disc pl-4"><li>FINDRISC score</li><li>Lifestyle & family</li><li>Prevention</li></ul>
+                    <button class="open-modal-btn tool-btn mt-2 bg-green-600 text-white text-xs md:text-sm px-3 py-2 rounded-full w-full font-medium flex items-center justify-center gap-2" data-tool="diabetes">
+                        <i class="fa-solid fa-calculator"></i> Check Risk
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL for health tools  -->
+    <div id="healthModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-brandTeal">Health Calculators</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="tool-tab" id="toolTabs">
+                <button class="active" data-tool="bmi">BMI</button>
+                <button data-tool="heart">Heart Risk</button>
+                <button data-tool="kidney">Kidney</button>
+                <button data-tool="diabetes">Diabetes</button>
+            </div>
+            <!-- BMI Panel -->
+            <div id="panel-bmi" class="calculator-panel active">
+                <p class="text-sm mb-3">Calculate your Body Mass Index</p>
+                <input type="number" id="bmiWeight" placeholder="Weight (kg)" class="calc-input">
+                <input type="number" id="bmiHeight" placeholder="Height (cm)" class="calc-input mt-2">
+                <button id="calcBmi" class="mt-4 bg-brandTeal text-white px-4 py-2 rounded-full w-full">Calculate BMI</button>
+                <div id="bmiResult" class="calc-result"></div>
+            </div>
+            <!-- Heart Risk Panel -->
+            <div id="panel-heart" class="calculator-panel">
+                <p class="text-sm mb-3">Heart Risk Assessment (simplified)</p>
+                <input type="number" id="heartAge" placeholder="Age (years)" class="calc-input">
+                <select id="heartGender" class="calc-input mt-2"><option value="male">Male</option><option value="female">Female</option></select>
+                <input type="number" id="heartSystolic" placeholder="Systolic BP (mmHg)" class="calc-input mt-2">
+                <input type="number" id="heartChol" placeholder="Total Cholesterol (mg/dL)" class="calc-input mt-2">
+                <button id="calcHeart" class="mt-4 bg-brandBlue text-white px-4 py-2 rounded-full w-full">Calculate Risk</button>
+                <div id="heartResult" class="calc-result"></div>
+            </div>
+            <!-- Kidney Panel -->
+            <div id="panel-kidney" class="calculator-panel">
+                <p class="text-sm mb-3">eGFR (CKD-EPI simplified)</p>
+                <input type="number" id="kidneyAge" placeholder="Age (years)" class="calc-input">
+                <select id="kidneyGender" class="calc-input mt-2"><option value="male">Male</option><option value="female">Female</option></select>
+                <input type="number" id="kidneyCreat" placeholder="Serum Creatinine (mg/dL)" class="calc-input mt-2">
+                <button id="calcKidney" class="mt-4 bg-yellow-600 text-white px-4 py-2 rounded-full w-full">Calculate eGFR</button>
+                <div id="kidneyResult" class="calc-result"></div>
+            </div>
+            <!-- Diabetes Panel -->
+            <div id="panel-diabetes" class="calculator-panel">
+                <p class="text-sm mb-3">Type 2 Diabetes Risk (FINDRISC style)</p>
+                <input type="number" id="diabAge" placeholder="Age (years)" class="calc-input">
+                <select id="diabBmi" class="calc-input mt-2"><option value="0">BMI < 25</option><option value="1">BMI 25-30</option><option value="2">BMI > 30</option></select>
+                <select id="diabFamily" class="calc-input mt-2"><option value="0">No family history</option><option value="1">Parent/sibling with diabetes</option></select>
+                <button id="calcDiab" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-full w-full">Calculate Risk</button>
+                <div id="diabResult" class="calc-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ SECTION with + / -->
+    <section class="section-bg-alt full-width py-16 md:py-20">
+        <div class="section-content">
+            <h2 class="text-3xl md:text-4xl font-medium mb-10 md:mb-12 text-textDark">Frequently Asked Questions</h2>
+            <div class="space-y-3 md:space-y-4">
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Do implants hurt?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Procedure is under local anesthesia; mild soreness afterwards, manageable with painkillers.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ How long does teeth whitening last?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">6 months to 2 years depending on diet and hygiene. Touch-ups available.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ What's the cost of Invisalign?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Starts from NPR 1,50,000; varies with complexity. Consultation free.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Are braces painful?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Mild discomfort after adjustments, usually subsides in few days.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ How often should I visit dentist?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Every 6 months for checkup and scaling.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Can I eat after root canal?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Wait until numbness wears off, soft foods for first 24h.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ What is laser gum contouring recovery?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Few days of mild sensitivity; immediate improvement.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Do you accept insurance?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Yes, we work with most local and international insurers.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Emergency appointments?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Same-day slots available for pain / trauma.</div>
+                </details>
+                <details class="bg-bgSoft p-4 md:p-5 rounded-2xl border border-brandTeal/20">
+                    <summary class="font-medium cursor-pointer">❓ Child's first dental visit?</summary>
+                    <div class="faq-content mt-3 text-textMuted text-sm">Recommended by age 1 or when first tooth appears.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS with top margin fixed -->
+    <section class="section-bg full-width py-16 md:py-20">
+        <div class="section-content">
+            <h2 class="text-3xl md:text-4xl font-medium mb-10 md:mb-12 text-textDark">Our Smile <span class="text-brandTeal">★</span> Google Reviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-soft flex flex-col items-center text-center"><img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-16 md:w-20 h-16 md:h-20 rounded-full mb-2 object-cover border-3 border-brandTeal"><div class="flex text-yellow-400 text-base md:text-lg">★★★★★</div><p class="italic text-xs md:text-sm mt-2">“Very professional and caring. Dr. Olivia explained everything.”</p><p class="text-xs md:text-sm mt-2 font-medium">– Ramesh K.</p></div>
+                <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-soft flex flex-col items-center text-center"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-16 md:w-20 h-16 md:h-20 rounded-full mb-2 object-cover border-3 border-brandTeal"><div class="flex text-yellow-400 text-base md:text-lg">★★★★★</div><p class="italic text-xs md:text-sm mt-2">“Clean clinic, friendly staff. My implant feels perfect.”</p><p class="text-xs md:text-sm mt-2 font-medium">– Sunita P.</p></div>
+                <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-soft flex flex-col items-center text-center"><img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-16 md:w-20 h-16 md:h-20 rounded-full mb-2 object-cover border-3 border-brandTeal"><div class="flex text-yellow-400 text-base md:text-lg">★★★★★</div><p class="italic text-xs md:text-sm mt-2">“Best decision to get aligners here. Fast and painless.”</p><p class="text-xs md:text-sm mt-2 font-medium">– Aayush G.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section-bg-alt full-width py-16 md:py-24">
+        <div class="section-content">
+            <h2 class="text-5xl md:text-6xl font-medium mb-10 md:mb-12 tracking-tight">About</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-bgSoft rounded-3xl md:rounded-4xl p-6 md:p-10 relative">
+                    <span class="text-xs md:text-sm text-gray-500 mb-3 md:mb-4 block">Our Mission</span>
+                    <h3 class="text-2xl md:text-4xl leading-[1.2] font-medium text-textDark mb-8 md:mb-12">Help you achieve a <span class="text-brandTeal">healthy, confident smile</span> that lasts a lifetime</h3>
+                    <div class="text-[10px] md:text-[11px] font-medium uppercase tracking-wider">— CEO Dencity</div>
+                </div>
+                <div class="bg-gray-200 rounded-3xl md:rounded-4xl relative overflow-hidden min-h-[300px] md:min-h-[400px]">
+                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2"><span class="w-12 md:w-14 h-12 md:h-14 rounded-full border-3 border-brandTeal overflow-hidden"><img src="https://images.unsplash.com/photo-1598256989800-fea5c5ce870b?w=200"></span><span class="w-12 md:w-14 h-12 md:h-14 rounded-full border-3 border-white overflow-hidden"><img src="https://images.unsplash.com/photo-1609840114035?w=200"></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOK CONSULTATION -->
+    <section id="book" class="section-bg full-width py-16 md:py-24">
+        <div class="section-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div>
+                    <h2 class="text-[2.5rem] md:text-[4.5rem] leading-[1.05] font-medium mb-10 md:mb-12 text-textDark">Book Free Consultation <span class="text-brandTeal">.</span></h2>
+                    <form id="bookingForm" class="flex flex-col gap-4 md:gap-5">
+                        <input type="text" id="name" placeholder="Your Name" class="pill-input text-sm md:text-base" required>
+                        <input type="email" id="email" placeholder="Email Address" class="pill-input text-sm md:text-base">
+                        <input type="text" id="address" placeholder="Your Address" class="pill-input text-sm md:text-base">
+                        <div class="grid grid-cols-2 gap-3 md:gap-5">
+                            <div class="relative">
+                                <div class="absolute left-3 md:left-4 top-3 md:top-4"><i class="fa-regular fa-calendar text-brandTeal"></i></div>
+                                <input type="text" id="date" placeholder="Date" class="pill-input pl-10 md:pl-12 text-sm md:text-base" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </div>
+                            <div class="relative">
+                                <div class="absolute left-3 md:left-4 top-3 md:top-4"><i class="fa-regular fa-clock text-brandTeal"></i></div>
+                                <input type="text" id="time" placeholder="Time" class="pill-input pl-10 md:pl-12 text-sm md:text-base" onfocus="(this.type='time')" onblur="(this.type='text')">
+                            </div>
+                        </div>
+                        <button type="submit" class="mt-2 md:mt-4 bg-brandTeal text-white rounded-full py-3 md:py-4 px-6 md:px-8 w-max flex items-center gap-2 md:gap-3 hover:bg-brandBlue transition text-sm md:text-base"><i class="fa-brands fa-whatsapp"></i> Book via WhatsApp</button>
+                    </form>
+                </div>
+                <div class="relative h-[300px] md:h-[400px] w-full rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-xl">
+                    <iframe src="https://maps.google.com/maps?q=27.692921,85.415791&z=15&output=embed" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="absolute bottom-4 md:bottom-6 left-3 md:left-4 bg-white/80 backdrop-blur-sm rounded-full p-2 md:p-3 pr-3 md:pr-6 shadow flex items-center gap-1 md:gap-2"><i class="fa-solid fa-location-dot text-brandTeal text-xs md:text-sm"></i><span class="text-[0.7rem] md:text-sm">Dencity Dental, Kathmandu</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+    <!-- MARQUEE -->
+    <aside class="full-width bg-brandTeal text-white overflow-hidden py-4 md:py-6 mb-10 md:mb-14">
+        <div class="flex animate-marquee min-w-max items-center gap-4 md:gap-6 text-xl md:text-3xl font-medium">✦ Confident Smiles ✦ Dental Harmony ✦ Dencity Care ✦</div>
+    </aside>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="section-bg-alt full-width pb-6 md:pb-8">
+        <br>
+        <br>
+        <div class="section-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-10 md:mb-12">
+                <div><div class="flex items-center gap-2 text-xl md:text-2xl font-medium mb-3 md:mb-4"><img src="assets/DencityDental Logo.jpg" class="w-6 md:w-8"> Dencity Dental</div><p class="text-xs md:text-sm text-textMuted">Exceptional care with modern technology.</p></div>
+                <div class="flex gap-8 md:gap-12 lg:justify-end">
+                    <div><h4 class="text-[0.7rem] md:text-xs font-bold tracking-widest uppercase">Phone</h4><p class="text-xs md:text-sm font-medium">+977 9708095535</p></div>
+                    <div><h4 class="text-[0.7rem] md:text-xs font-bold tracking-widest uppercase">Email</h4><a href="mailto:care@dencitydental.com" class="text-xs md:text-sm hover:text-brandTeal">care@dencitydental.com</a></div>
+                </div>
+            </div>
+            <hr class="border-gray-300 mb-8 md:mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 text-xs md:text-sm">
+                <div class="lg:col-span-2"><h4 class="text-[0.7rem] md:text-xs font-bold uppercase mb-3 md:mb-4">Clinic Hours</h4><ul><li>Mon-Fri: 8am-3pm</li><li>Sat: 8am-1pm</li><li>Sun: Closed</li></ul><p class="text-[0.6rem] md:text-xs text-gray-500 mt-4 md:mt-6">© 2023 Dencity Dental Care</p></div>
+                <div><ul class="space-y-1 md:space-y-2 font-medium"><li><a href="#" class="hover:text-brandTeal">About</a></li><li><a href="#" class="hover:text-brandTeal">Services</a></li><li><a href="#" class="hover:text-brandTeal">Dentists</a></li></ul></div>
+                <div><ul class="space-y-1 md:space-y-2"><li><a href="#" class="hover:text-brandTeal">Location</a></li><li><a href="#" class="hover:text-brandTeal">Career</a></li><li><a href="#" class="hover:text-brandTeal">Privacy</a></li></ul></div>
+                <div><ul class="flex gap-3 md:gap-4 text-xl md:text-2xl">
+                    <li><a href="#" class="hover:text-brandTeal"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="#" class="hover:text-brandTeal"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#" class="hover:text-brandTeal"><i class="fa-brands fa-twitter"></i></a></li>
+                </ul></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- floating buttons with updated WhatsApp number -->
+    <a href="https://wa.me/9779708095535?text=Hi%2C%20I%20want%20to%20book%20a%20free%20consultation" class="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 w-12 md:w-14 h-12 md:h-14 bg-brandTeal border-2 border-white rounded-full flex items-center justify-center shadow-lg hover:bg-brandBlue transition"><i class="fa-brands fa-whatsapp text-xl md:text-2xl text-white"></i></a>
+    <a href="#health-tools" class="fixed bottom-4 md:bottom-6 left-4 md:left-6 bg-white border-2 border-brandTeal text-brandTeal rounded-full px-3 md:px-5 py-2 md:py-3 shadow-lg font-medium text-xs md:text-sm z-50 hidden md:flex items-center hover:bg-brandTeal hover:text-white transition"><i class="fa-regular fa-clipboard mr-1 md:mr-2"></i> Health Tools</a>
+
+    <!-- scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky nav with translucent effect on scroll
+            const nav = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu functionality
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeMobile = document.getElementById('closeMobileMenu');
+
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                menuOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                menuOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            mobileBtn?.addEventListener('click', openMobileMenu);
+            closeMobile?.addEventListener('click', closeMobileMenu);
+            menuOverlay?.addEventListener('click', closeMobileMenu);
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+                const id = this.getAttribute('href'); 
+                if(id === '#') return; 
+                const el = document.querySelector(id); 
+                if(el) { 
+                    e.preventDefault(); 
+                    el.scrollIntoView({behavior:'smooth'});
+                    closeMobileMenu();
+                }
+            }));
+
+            // Dentist carousel scroll
+            const carousel = document.getElementById('dentist-carousel');
+            const prev = document.getElementById('btn-prev'), next = document.getElementById('btn-next');
+            if(carousel && prev && next) {
+                next.addEventListener('click', ()=> carousel.scrollBy({left:300, behavior:'smooth'}));
+                prev.addEventListener('click', ()=> carousel.scrollBy({left:-300, behavior:'smooth'}));
+            }
+
+            // Booking form -> whatsapp with updated number
+            const form = document.getElementById('bookingForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const date = document.getElementById('date').value;
+                const time = document.getElementById('time').value;
+                if(!name) { alert('Please enter name'); return; }
+                const msg = `New Consultation:%0A Name: ${name}%0A Email: ${email}%0A Address: ${address}%0A Date: ${date}%0A Time: ${time}`;
+                window.open(`https://wa.me/9779708095535?text=${msg}`, '_blank');
+                form.reset();
+            });
+
+            // Section background change on scroll
+            const sections = document.querySelectorAll('.section-bg, .section-bg-alt');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) entry.target.classList.add('scrolled');
+                    else entry.target.classList.remove('scrolled');
+                });
+            }, { threshold: 0.2, rootMargin: '0px' });
+            sections.forEach(s => observer.observe(s));
+
+            // Health Tools Modal Logic
+            const modal = document.getElementById('healthModal');
+            const closeModal = document.getElementById('closeModal');
+            const openBtns = document.querySelectorAll('.open-modal-btn');
+            const tabs = document.querySelectorAll('#toolTabs button');
+            const panels = document.querySelectorAll('.calculator-panel');
+
+            function showTool(toolId) {
+                panels.forEach(p => p.classList.remove('active'));
+                tabs.forEach(t => t.classList.remove('active'));
+                document.getElementById('panel-' + toolId).classList.add('active');
+                document.querySelector(`#toolTabs button[data-tool="${toolId}"]`).classList.add('active');
+            }
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tool = btn.getAttribute('data-tool');
+                    showTool(tool);
+                    modal.style.display = 'flex';
+                });
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tool = tab.getAttribute('data-tool');
+                    showTool(tool);
+                });
+            });
+
+            closeModal.addEventListener('click', () => modal.style.display = 'none');
+            window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+
+            // BMI calculator
+            document.getElementById('calcBmi').addEventListener('click', () => {
+                const w = parseFloat(document.getElementById('bmiWeight').value);
+                const h = parseFloat(document.getElementById('bmiHeight').value)/100;
+                if(!w || !h) { document.getElementById('bmiResult').innerText = 'Please enter valid values'; return; }
+                const bmi = w/(h*h);
+                let cat = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obese';
+                document.getElementById('bmiResult').innerHTML = `BMI: ${bmi.toFixed(1)} (${cat})`;
+            });
+
+            // Heart risk (simplified)
+            document.getElementById('calcHeart').addEventListener('click', () => {
+                const age = parseInt(document.getElementById('heartAge').value);
+                const gender = document.getElementById('heartGender').value;
+                const sys = parseInt(document.getElementById('heartSystolic').value);
+                const chol = parseInt(document.getElementById('heartChol').value);
+                if(!age || !sys || !chol) { document.getElementById('heartResult').innerText = 'Enter all fields'; return; }
+                let risk = 'Low';
+                if(age > 55 || sys > 140 || chol > 240) risk = 'Moderate';
+                if(age > 65 && sys > 160 && chol > 260) risk = 'High';
+                document.getElementById('heartResult').innerHTML = `Estimated risk: ${risk}`;
+            });
+
+            // Kidney eGFR (simplified)
+            document.getElementById('calcKidney').addEventListener('click', () => {
+                const age = parseInt(document.getElementById('kidneyAge').value);
+                const gender = document.getElementById('kidneyGender').value;
+                const creat = parseFloat(document.getElementById('kidneyCreat').value);
+                if(!age || !creat) { document.getElementById('kidneyResult').innerText = 'Enter values'; return; }
+                let egfr = (140-age)* (gender==='male'?1.0:0.85) * (1/creat);
+                if(egfr > 140) egfr = 140;
+                document.getElementById('kidneyResult').innerHTML = `eGFR: ${egfr.toFixed(1)} mL/min/1.73m²`;
+            });
+
+            // Diabetes risk
+            document.getElementById('calcDiab').addEventListener('click', () => {
+                const age = parseInt(document.getElementById('diabAge').value);
+                const bmiCat = parseInt(document.getElementById('diabBmi').value);
+                const fam = parseInt(document.getElementById('diabFamily').value);
+                if(!age) { document.getElementById('diabResult').innerText = 'Enter age'; return; }
+                let score = 0;
+                if(age > 45) score += 1;
+                if(age > 55) score += 2;
+                score += bmiCat * 2;
+                score += fam * 3;
+                let risk = score < 3 ? 'Low' : score < 6 ? 'Moderate' : 'High';
+                document.getElementById('diabResult').innerHTML = `Risk score: ${score} (${risk})`;
+            });
+        });
+    </script>
+</body>
+</html>
